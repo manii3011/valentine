@@ -853,9 +853,12 @@
 
         .timer-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
             margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .timer-box {
@@ -1036,13 +1039,119 @@
             transform: scale(1.3);
         }
 
+        /* Valentine's Day Message */
+        .valentine-message {
+            display: none;
+            text-align: center;
+            animation: zoomIn 0.8s ease;
+        }
+
+        .valentine-message.show {
+            display: block;
+        }
+
+        .valentine-message h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            background: linear-gradient(135deg, #ff69b4, #ff1493, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.4),
+                0 0 15px rgba(255, 20, 147, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .valentine-message .hearts-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            font-size: 3rem;
+        }
+
+        .valentine-message .heart-float {
+            animation: heartBeat 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px #ff69b4);
+        }
+
+        .valentine-message .heart-float:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .valentine-message .heart-float:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .valentine-message .heart-float:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                filter: brightness(1) drop-shadow(0 0 5px rgba(255, 105, 180, 0.3));
+            }
+
+            50% {
+                filter: brightness(1.1) drop-shadow(0 0 10px rgba(255, 20, 147, 0.4));
+            }
+        }
+
+        .valentine-message .subtitle-valentine {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 300;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .continue-quiz-btn {
+            padding: 18px 60px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 30px;
+        }
+
+        .continue-quiz-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+        }
+
         @media (max-width: 768px) {
             .proposal-container h1 {
                 font-size: 2rem;
             }
 
+            .valentine-message h2 {
+                font-size: 2.5rem;
+            }
+
             .timer-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .image-slider {
@@ -1076,6 +1185,18 @@
                 <button id="noBtn" class="btn">No</button>
             </div>
         </div>
+
+        <!-- Valentine's Day Message -->
+        <div class="proposal-container valentine-message" id="valentineMessage">
+            <h2>Happy Valentine's Day Ammu! 💕</h2>
+            <div class="hearts-wrapper">
+                <span class="heart-float">💖</span>
+                <span class="heart-float">💗</span>
+                <span class="heart-float">💖</span>
+            </div>
+            <p class="subtitle-valentine">You are my everything! 🌹</p>
+            <button class="continue-quiz-btn" onclick="startQuizPage()">Continue to Questions 💝</button>
+        </div>
     </div>
 
     <!-- Page 2: Quiz -->
@@ -1097,7 +1218,7 @@
 
             <!-- Quiz Content -->
             <div id="quizContent" style="display: none;">
-                <h2>Question <span id="currentQuestionNum">1</span> of 6</h2>
+                <h2>Question <span id="currentQuestionNum">1</span> of 7</h2>
 
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
@@ -1131,24 +1252,16 @@
             <p class="subtitle-timer">We've been together for...</p>
             <div class="timer-grid">
                 <div class="timer-box">
-                    <span class="timer-value" id="years">0</span>
-                    <span class="timer-label">Years</span>
-                </div>
-                <div class="timer-box">
-                    <span class="timer-value" id="months">0</span>
-                    <span class="timer-label">Months</span>
-                </div>
-                <div class="timer-box">
-                    <span class="timer-value" id="weeks">0</span>
-                    <span class="timer-label">Weeks</span>
-                </div>
-                <div class="timer-box">
                     <span class="timer-value" id="days">0</span>
                     <span class="timer-label">Days</span>
                 </div>
                 <div class="timer-box">
                     <span class="timer-value" id="hours">0</span>
                     <span class="timer-label">Hours</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-value" id="minutes">0</span>
+                    <span class="timer-label">Minutes</span>
                 </div>
                 <div class="timer-box">
                     <span class="timer-value" id="seconds">0</span>
@@ -1169,26 +1282,24 @@
             <h2>Our Beautiful Moments</h2>
             <div class="image-slider">
                 <div class="slide active-slide">
-                    <img src="https://via.placeholder.com/600x400/ff6b9d/ffffff?text=Memory+1" alt="Memory 1">
+                    <img src="memory1.jpg.png" alt="Our Memory 1">
                 </div>
                 <div class="slide">
-                    <img src="https://via.placeholder.com/600x400/c44569/ffffff?text=Memory+2" alt="Memory 2">
+                    <img src="memory2.jpg.png" alt="Our Memory 2">
                 </div>
                 <div class="slide">
-                    <img src="https://via.placeholder.com/600x400/f093fb/ffffff?text=Memory+3" alt="Memory 3">
+                    <img src="memory3.jpg.jpg" alt="Our Memory 3">
                 </div>
                 <div class="slide">
-                    <img src="https://via.placeholder.com/600x400/4facfe/ffffff?text=Memory+4" alt="Memory 4">
+                    <img src="memory4.jpg.jpg" alt="Our Memory 4">
                 </div>
                 <div class="slide">
-                    <img src="https://via.placeholder.com/600x400/00f2fe/ffffff?text=Memory+5" alt="Memory 5">
+                    <img src="memory5.jpg.jpg" alt="Our Memory 5">
                 </div>
                 <div class="slide">
-                    <img src="https://via.placeholder.com/600x400/43e97b/ffffff?text=Memory+6" alt="Memory 6">
+                    <img src="memory6.jpg.png" alt="Our Memory 6">
                 </div>
-                <div class="slide">
-                    <img src="https://via.placeholder.com/600x400/fa709a/ffffff?text=Memory+7" alt="Memory 7">
-                </div>
+
             </div>
             <div class="dots" id="dotsContainer"></div>
             <div class="slider-controls">
@@ -1200,7 +1311,7 @@
             🎵 <span id="musicStatus">Play Music</span>
         </div>
         <audio id="backgroundMusic" loop>
-            <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+            <source src="adiyae.mp3.mp3" type="audio/mpeg">
         </audio>
     </div>
 
@@ -1267,9 +1378,15 @@
         });
 
         yesBtn.addEventListener('click', function () {
+            // Hide proposal, show valentine message
+            document.querySelector('.proposal-container:not(.valentine-message)').style.display = 'none';
+            document.getElementById('valentineMessage').classList.add('show');
+        });
+
+        function startQuizPage() {
             goToPage(2);
             initQuiz();
-        });
+        }
 
         // Page Navigation
         function goToPage(pageNumber) {
@@ -1290,6 +1407,11 @@
                 question: "What is our proposed date?",
                 options: ["November 15, 2021", "November 23, 2021", "December 1, 2021", "October 30, 2021"],
                 correct: 1
+            },
+            {
+                question: "What food did we eat when we met first time?",
+                options: ["Biryani", "Pizza", "Dosa", "Burger"],
+                correct: 0
             },
             {
                 question: "When is our first meet?",
@@ -1402,12 +1524,12 @@
                 const scoreText = document.getElementById('scoreText');
                 const scoreMessage = document.getElementById('scoreMessage');
 
-                scoreNumber.textContent = `${quizScore}/6`;
+                scoreNumber.textContent = `${quizScore}/7`;
 
-                if (quizScore === 6) {
+                if (quizScore === 7) {
                     scoreText.textContent = "Perfect Score! 🎉";
                     scoreMessage.textContent = "You remember everything about us! You're amazing! 💕";
-                } else if (quizScore >= 4) {
+                } else if (quizScore >= 5) {
                     scoreText.textContent = "Great Job! 😊";
                     scoreMessage.textContent = "You know our story well! Let's make more memories! ❤️";
                 } else {
@@ -1432,21 +1554,22 @@
             const now = new Date();
             const diff = now - relationshipStartDate;
 
-            // Calculate time units
-            const seconds = Math.floor(diff / 1000);
-            const minutes = Math.floor(seconds / 60);
-            const hours = Math.floor(minutes / 60);
-            const days = Math.floor(hours / 24);
-            const weeks = Math.floor(days / 7);
-            const months = Math.floor(days / 30.44); // Average month length
-            const years = Math.floor(days / 365.25); // Account for leap years
+            // Calculate total time units
+            const totalSeconds = Math.floor(diff / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const totalHours = Math.floor(totalMinutes / 60);
+            const totalDays = Math.floor(totalHours / 24);
 
-            document.getElementById('years').textContent = years;
-            document.getElementById('months').textContent = months;
-            document.getElementById('weeks').textContent = weeks;
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('seconds').textContent = seconds;
+            // Calculate remaining time for display
+            const displayHours = totalHours % 24;
+            const displayMinutes = totalMinutes % 60;
+            const displaySeconds = totalSeconds % 60;
+
+            // Update display
+            document.getElementById('days').textContent = totalDays;
+            document.getElementById('hours').textContent = displayHours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = displayMinutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = displaySeconds.toString().padStart(2, '0');
         }
 
         // Page 4: Image Slider Logic
